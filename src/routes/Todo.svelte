@@ -64,9 +64,7 @@
 
 <style>
 /*https://stackoverflow.com/questions/71760177/styling-the-body-element-in-svelte*/
-:global(body) {
-    font-family: "Cherry Bomb One", sans-serif;
-}
+
 ul {
     list-style: none;
 }

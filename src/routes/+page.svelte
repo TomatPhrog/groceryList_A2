@@ -6,5 +6,8 @@
 
 <Todo />
 <style>
-
+:global(body) {
+    font-family: "Cherry Bomb One", sans-serif;
+    margin: 0%;
+}
 </style>
