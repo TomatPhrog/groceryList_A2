@@ -59,7 +59,7 @@
     </ul>
 </div>
 
-<button onclick={clearAll}>Clear List</button>
+<button onclick={clearAll}>Clear All</button>
 
 
 <style>
@@ -67,6 +67,21 @@
 
 ul {
     list-style: none;
+    padding-left: 1em;
+}
+input[type="checkbox"] {
+    height: 15px;
+    width: 15px ;
+    accent-color: #178d52;
+    &:hover {
+        border: #178d52;
+        accent-color: #178d5272; 
+    }
+}
+
+li {
+    font-size: 1.5em;
+    font-weight: 50;
 }
 li span.done {
     text-decoration: line-through;
