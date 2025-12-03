@@ -1,5 +1,6 @@
 <script>
-    let clearDone = document.querySelector('#clear-done');
+    import linedPage from '$lib/assets/lined-paper-with-paperclip.png';
+    let allDone = $state();
     import {onMount} from 'svelte';
 
     let groceryItem = $state('');
@@ -13,6 +14,7 @@
     })
 
     function updateList() {
+        checkIfAllChecked()
         return localStorage.setItem("storedList", JSON.stringify(groceryList));
     }
 
@@ -20,6 +22,7 @@
     function addItem(event) {
         event.preventDefault(); //form buttons want to refresh the page and we don't want that
         if (groceryItem.trim().length === 0) {
+            checkIfAllChecked()
             return; //if the item is empty it cannot be added to the list
         }
 
@@ -29,7 +32,6 @@
         }];
         updateList();
         groceryItem = '';
-        checkIfAllChecked();
     }
 
     function removeItem(index) {
@@ -44,18 +46,18 @@
     }
 
     function checkIfAllChecked(){
-        let eachArrGrocery = 0;
-        console.log("checking");
+        let completeGrocery = 0;
         groceryList.forEach(listItem => {
-            console.log("for eaching");
-            if (!groceryList.done) {
-                eachArrGrocery += 1;
-                //console.log("groc arr", eachArrGrocery);
-                //console.log("array", groceryList.length);
+            if (listItem.done === true) {
+                completeGrocery += 1;
+                //console.log("completeGrocery", completeGrocery);
             }
         })
-        if (eachArrGrocery === groceryList.length) {
-            clearDone.classList.remove("disabled");
+        if (completeGrocery === groceryList.length) {
+            //console.log("enable 'clear done' button");
+            allDone = true;
+        } else {
+            allDone = false;
         }
     }
 </script>
@@ -64,7 +66,6 @@
     <input type="text" bind:value={groceryItem}>
     <button type="submit">Add</button>
 </form>
-
 <div class="grocery-layout">
     <div class="grocery-list">
         <ul>
@@ -79,14 +80,14 @@
     </div>
     <div class="sort-options">
         <div class="stickynote">
-            <h3>checked</h3>
+            <h3>Add items to the list!</h3>
         </div>
         <div class="stickynote">
-            <h3>trash</h3>
+            <h3>Clear your list once done!</h3>
         </div>
     </div>
 </div>
-<button id="clear-done" onclick={clearAll} disabled>Clear Done</button>
+<button onclick={clearAll} disabled={!allDone}>Clear Done</button>
 
 <!---------------------------------------------------------------------------->
 <style>
@@ -116,20 +117,27 @@ input[type="checkbox"] {
 }
 .grocery-layout{
     justify-content: space-between;
-    @media (min-width: 470px) {
+    @media (min-width: 825px) {
         display: flex;
     }
     .grocery-list{
-        background-image: src="../lib/assets/blank-lined-paper.png";
+        margin-bottom: 3em;
+        background-image: src="{linedPage}";
     }
     .sort-options{
-        @media (max-width: 649px){
+        @media (max-width: 825px){
             display: flex;
+            justify-content: space-between;
         }
         .stickynote{
             width: 8em;
             height: 8em;
             background-color: #e9d16f;
+            margin-top: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
         }
     }
 }
