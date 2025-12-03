@@ -15,6 +15,9 @@
     font-family: "Cherry Bomb One", sans-serif;
     margin: 0%;
     padding: 0em 5em;
+    @media (min-width: 470px){
+        padding: 0em 20em;
+    }
 }
 h1 {
     font-size: 3em;
