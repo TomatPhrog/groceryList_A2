@@ -23,6 +23,9 @@
      @media (min-width: 1400px){
         padding: 0em 20em;
     }
+     @media (min-width: 1600px){
+        padding: 0em 25em;
+    }
 }
 h1 {
     font-size: 3em;
